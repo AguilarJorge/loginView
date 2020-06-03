@@ -1,0 +1,469 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+$negro: #121618;
+$blanco: #fff;
+$prefix: 'loginView_';
+body{
+  overflow-x: hidden;
+  color: #666;
+  padding: 0;
+  margin: 0 auto;
+  *{
+    font-family: 'Montserrat', sans-serif;
+  }
+  p{
+    margin: 0;
+    @media only screen and (max-width: 480px) {
+      letter-spacing: 0 !important;
+    }
+  }
+  a {
+    text-decoration: none;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background: #dcdcdc;
+}
+::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background: -webkit-linear-gradient(-45deg, #dcdcdc 10%, #bfbebe 91%);
+  background: linear-gradient(135deg, #dcdcdc 10%, #bfbebe 91%);
+}
+
+@keyframes animGrad{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+@keyframes animImg{
+  0%{background-position:0% 0%}
+  100%{background-position:0% 100%}
+}
+@keyframes animSVG{
+  100% {
+    d: path("M0,10c60,50,175,10,300,50C 500,100,600,100,800,40s250-40,350-10s100,30,420,-50s200,5,300-20  C1600,20,1600,0,1366,0V150H0z");
+  }
+}
+@keyframes girando{
+  0%{
+    transform: rotate(180deg);
+  }
+  100%{
+    transform: rotate(-180deg);
+  }
+}
+
+.#{$prefix}login{
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(150deg, #009bdb, #001d7e);
+  background-size: 300%;
+  animation: animGrad 40s ease infinite;
+  overflow: hidden;
+  .fondoImagen{
+    background-image: url(../img/pattern.png);
+    background-position: center;
+    background-repeat: repeat;
+    background-size: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: .1;
+    animation: animImg 12s linear infinite;
+  }
+  .#{$prefix}container{
+    margin: 0 auto;
+    max-width: 2048px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    padding: 20px 0 !important;
+    z-index: 5;
+    .formularios{
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      align-content: center;
+      width: 350px;
+      min-height: 400px;
+      background-color: $blanco;
+      border-radius: 10px;
+      box-shadow: 0 3px 15px 2px rgba($negro,.3);
+      position: relative;
+      z-index: 1;
+      &.recuperar{
+        .avatar{
+          transform: translateY(50%) rotateX(360deg);
+          background-image: url(../img/avatarKey.png) !important;
+        }
+        .botonLogin, .botonRegresar{
+          transform: translateY(50%) rotate(180deg);
+        }
+      }
+      &.registrar{
+        .avatar{
+          opacity: 0;
+          transform: translateX(100%) translateY(-50%) rotateX(0deg) rotate(90deg);
+          transition-duration: 1s;
+        }
+        .botonLogin, .botonRegresar{
+          transform: translateY(50%) rotate(180deg);
+        }
+      }
+      .avatar{
+        background-image: url(../img/avatar.jpg);
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        top: 0;
+        transform: translateY(-50%) rotateX(0deg);
+        border-radius: 50%;
+        background-color: $blanco;
+        border: 5px solid $blanco;
+        z-index: 1;
+        transition: ease all 1.5s;
+      }
+      .form{
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+        width: 100%;
+        .campo{
+          display: flex;
+          flex-wrap: nowrap;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-end;
+          align-content: center;
+          width: 90%;
+          position: relative;
+          padding-top: 15px !important;
+          margin: 10px auto !important;
+          &:before, &:after{
+            content: "";
+            position: absolute;
+            background-color: $negro;
+            width: 0;
+            height: 1px;
+            transition: ease all .3s;
+          }
+          &:before{
+            left: 0;
+            bottom: 0;
+          }
+          &:after{
+            right: 0;
+            top: 15px;
+          }
+          &.movido{
+            &:before{
+              width: 100%;
+            }
+            label{
+              bottom: calc(100% - 23px);
+              padding: 0 5px !important;
+              font-size: 14px;
+              font-weight: 600;
+              background-color: $blanco;
+              z-index: 1;
+            }
+          }
+          &.validado{
+            &:after{
+              width: 100%;
+              background-color: #5cb8fd;
+              transition-delay: .2s;
+            }
+            &:before{
+              background-color: #5cb8fd;
+            }
+            .lineaAnim{
+              &:after{
+                height: calc(100% - 15px);
+                background-color: #5cb8fd;
+              }
+              &:before{
+                height: calc(100% - 15px);
+                background-color: #5cb8fd;
+                transition-delay: .4s;
+              }
+            }
+            label{
+              color: #5cb8fd;
+            }
+          }
+          &.error{
+            label, input{
+              color: red;
+              border-color: red;
+            }
+            .errorMsg{
+              display: block;
+            }
+          }
+          label{
+            position: absolute;
+            left: 10px;
+            bottom: 10px;
+            transition: ease all .5s;
+          }
+          input{
+            width: calc(100% - 20px);
+            margin: 0;
+            padding: 10px !important;
+            border: 0;
+            outline: none;
+            background-color: transparent;
+            font-size: 18px;
+            z-index: 5;
+            border-bottom: 1px solid rgba($negro,.2);
+            transition: ease all .5s;
+          }
+          .errorMsg{
+            display: none;
+            padding: 3px 5px !important;
+            background-color: red;
+            color: $blanco;
+            font-size: 12px;
+            letter-spacing: 1px;
+            font-weight: 900;
+            text-align: center;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: calc(100% + 10px);
+            z-index: 6;
+            &:before{
+              content: "";
+              position: absolute;
+              left: 50%;
+              transform: translateX(-50%);
+              top: -10px;
+              width: 0;
+              height: 0;
+              border-left: 10px solid transparent;
+              border-bottom: 10px solid red;
+              border-right: 10px solid transparent;
+            }
+          }
+          .lineaAnim{
+            &:before, &:after{
+              content: "";
+              position: absolute;
+              background-color: $negro;
+              width: 1px;
+              height: 0;
+              transition: ease all .3s;
+            }
+            &:before{
+              left: 0;
+              top: 15px;
+            }
+            &:after{
+              right: 0;
+              bottom: 0;
+            }
+          }
+        }
+        .laOlvide{
+          color: #5cb8fd;
+          margin: 0 auto 10px 5%;
+          padding-bottom: 5px;
+          font-size: 13px;
+          font-weight: 900;
+          position: relative;
+          &:hover{
+            &:after{
+              width: 100%;
+            }
+          }
+          &:after{
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 1px;
+            background-color: #5cb8fd;
+            transition: ease all .5s;
+          }
+        }
+        .contenedorBoton{
+          display: flex;
+          flex-wrap: nowrap;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          align-content: center;
+          width: 100%;
+          padding: 10px 0;
+          text-align: center;
+          p{
+            font-size: 13px;
+            font-weight: 900;
+          }
+          .crear, .recuperar, .registrar{
+            color: #5cb8fd;
+            margin: 5px;
+            font-size: 20px;
+            position: relative;
+            &:hover{
+              &:after{
+                width: 100%;
+              }
+            }
+            &:after{
+              content: "";
+              position: absolute;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              width: 0;
+              height: 1px;
+              margin: 0 auto;
+              background-color: #5cb8fd;
+              transition: ease all .5s;
+            }
+          }
+        }
+      }
+      .formContra, .formRegistro{
+        position: absolute;
+        display: none;
+        padding-top: 100px;
+        p{
+          width: 90%;
+          margin: 0 auto;
+          text-align: center;
+          font-size: 20px;
+          font-weight: 900;
+        }
+      }
+      .formRegistro{
+        padding-top: 0;
+      }
+      .botonLogin, .botonRegresar{
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+        position: absolute;
+        bottom: 0;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        transform: translateY(50%);
+        background-color: $blanco;
+        box-shadow: 0 0 20px 0 rgba($negro,.3);
+        transition: ease all .5s;
+        &:before{
+          content: "";
+          width: 25px;
+          height: 1px;
+          background-color: $negro;
+          transform: translateX(5px);
+        }
+        &:after{
+          content: "";
+          width: 10px;
+          height: 10px;
+          border: 1px solid $negro;
+          transform: rotate(45deg) translateX(-5px) translateY(5px);
+          border-left: 0;
+          border-bottom: 0;
+        }
+      }
+      .botonRegresar{
+        display: none;
+      }
+    }
+    @media only screen and (max-width: 1024px) {
+      width: 90%;
+    }
+    @media only screen and (max-width: 480px) {
+      .formularios{
+        width: 100%;
+      }
+    }
+  }
+  .companyLogo{
+    background-image: url(../img/logo1.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    width: 200px;
+    height: 80px;
+    z-index: 1;
+  }
+  .circularLogo{
+    background-image: url(../img/logoCircular.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    left: -50px;
+    bottom: -50px;
+    animation: girando 60s linear infinite;
+    z-index: 1;
+  }
+  .svgs{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    .onda{
+      position: absolute;
+      bottom: 0;
+      &:last-child{
+        transform: rotateY(180deg);
+      }
+      path{
+        opacity: .5;
+        fill: $blanco;
+        animation: animSVG 10s ease alternate infinite;
+      }
+    }
+  }
+  @media only screen and (max-width: 480px) {
+    .companyLogo{
+      right: 10px;
+      bottom: 10px;
+      width: 100px;
+    }
+    .circularLogo{
+      width: 150px;
+      height: 150px;
+      left: -30px;
+      bottom: -80px;
+    }
+  }
+}
