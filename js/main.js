@@ -31,6 +31,18 @@ $(function() {
       });
     });
   });
+  //A loguear
+  $('.loginView_login .formularios .botonLogin').click(function(e){
+    var errors = false;
+    $('.formLogin .campo').each(function(index, campo){
+      var input = $(campo).children('input');
+      if (input.val().length <= 0) {
+        $(campo).addClass('error');
+        errors = true;
+      }
+    })
+    if (errors) e.preventDefault();
+  })
 
   //Funcion para alternar forms
   function cambiarForm(clase, form){
